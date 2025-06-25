@@ -1,0 +1,521 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Fira Code";
+}
+
+@media (min-width: 768px) {
+  body {
+    background-color: #212121;
+    overflow-x: hidden;
+    z-index: 0;
+  }
+
+  header {
+    position: fixed;
+    background-color: white;
+    height: auto;
+    width: 100%;
+    padding: 15px 30px;
+    border-bottom: 2px solid black;
+    margin-bottom: 2%;
+    transition: transform 0.3s ease;
+    transform: translateY(-100%);
+    z-index: 3;
+  }
+
+  header.show {
+    transform: translateY(0);
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 50px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    color: #3DA35D;
+  }
+
+  .foto-perfil {
+    width: 650px;
+    height: 650px;
+    border-radius: 100%;
+    object-fit: cover;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: border-radius 0.5s ease-in;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .foto-perfil:hover {
+    border-radius: 20%;
+  }
+
+
+
+  .botao {
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    border: 2px solid black;
+    z-index: 2
+  }
+
+  .botao:hover {
+    color: #3DA35D;
+    background-color: black;
+    transform: scale(1, 1);
+  }
+
+  .home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px;
+
+    min-height: 100vh;
+    padding: 50px 20px;
+  }
+
+  .frase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    gap: 5px;
+  }
+
+  .botoes {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    transition: background-color 0.5 ease, color 0.5 ease;
+    cursor: pointer;
+  }
+
+
+  .slider-projetos {
+    padding: 50px 20px;
+    background-color: #212121;
+    color: white;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    /* + */
+    flex-direction: column;
+    /* + empilha title e slider container */
+    align-items: center;
+    /* + centraliza horizontalmente */
+    justify-content: center;
+  }
+
+  .slider-container {
+    color: black;
+    /* toma todo espaço vertical sobrando */
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Cada slide */
+  .slide {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    background-color: white;
+
+  }
+
+  .slide.ativo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    opacity: 1;
+  }
+
+  .imagem-texto {
+    margin: 10px;
+    word-wrap: break-word;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .imagem-texto img {
+    flex: 7;
+    width: 500px;
+    height: 100%;
+    flex-shrink: 0;
+    border: 2px solid black;
+  }
+
+  .slide .imagem-texto p {
+    flex: 3;
+    /* 30% de base */
+    flex-shrink: 1;
+    /* encolhe se necessário */
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #3DA35D;
+    opacity: 0.5;
+    color: black;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 50%;
+  }
+
+  .prev {
+    left: 10px;
+  }
+
+  .next {
+    right: 10px;
+  }
+
+
+  .habilidades {
+    min-height: 100vh;
+    background-color: #212121;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cards-container {
+    display: flex;
+    gap: 20px;
+    perspective: 1000px;
+    /* ativa o efeito 3D */
+  }
+
+  .card {
+    width: 300px;
+    height: 400px;
+    position: relative;
+  }
+
+  .flip {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease;
+  }
+
+  .card:hover .flip {
+    transform: rotateY(180deg);
+  }
+
+  .frente,
+  .tras {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #3DA35D;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .frente {
+    background-color: #3DA35D;
+    color: black;
+  }
+
+  .tras {
+    transform: rotateY(180deg);
+    background-color: white;
+  }
+
+  .tras ul {
+    text-align: justify;
+  }
+
+  .contato {
+    display: flex;
+    min-height: 100vh;
+    background-color: white;
+    padding: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container-contato {
+    width: 750px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 2;
+
+  }
+
+  .container-contato img {
+    width: 100px;
+    width: 100px;
+    object-fit: cover;
+  }
+
+  footer {
+    display: flex;
+    background-color: #212121;
+    color: white;
+    height: 50px;
+    text-align: center;
+    font-size: small;
+    font-family: 'Times New Roman', Times, serif;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+
+@media (max-width: 600px) {
+  header {
+    display: none;
+    /* esconde o menu fixo no mobile */
+  }
+
+  body {
+    background-color: #212121;
+  }
+
+  .home {
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    min-height: auto;
+    background-color: #212121;
+
+  }
+
+  .foto-perfil {
+    border-radius: 5px;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+  }
+
+  .frase {
+    font-size: small;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 100%;
+    gap: 10px;
+    align-items: center;
+    margin: 5px;
+  }
+
+  .botoes {
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .botao {
+    width: 20px;
+    padding: 3px;
+    background-color: white;
+    color: black;
+    border-radius: 8px;
+    border: 2px solid black;
+    text-align: center;
+    font-size: small;
+    text-decoration: none;
+  }
+
+  .botao:hover {
+    color: #3DA35D;
+    background-color: black;
+  }
+
+  .imagem-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin: 10px 0;
+  }
+
+  .imagem-texto img {
+    width: 100%;
+    height: auto;
+    border: 2px solid black;
+  }
+
+  .slide .imagem-texto p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    padding: 0 10px;
+    text-align: justify;
+  }
+
+  .slider-container {
+    background-color: white;
+    padding: 5px;
+  }
+
+  .slider-projetos {
+    margin: 5px;
+  }
+
+
+  .habilidades {
+    padding: 20px 10px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    perspective: 800px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+    height: 280px;
+    position: relative;
+  }
+
+  .flip {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease;
+  }
+
+  .card:hover .flip {
+    transform: rotateY(180deg);
+  }
+
+  .frente,
+  .tras {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #212121;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #212121;
+    color: #3DA35D;
+    font-family: "Fira Code";
+    padding: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .frente {
+    z-index: 2;
+  }
+
+  .tras {
+    transform: rotateY(180deg);
+  }
+
+  .tras ul {
+    text-align: left;
+    padding: 0 10px;
+  }
+
+
+  .container-contato {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding: 5px;
+  }
+
+  .container-contato h2 {
+    display: none;
+  }
+
+  .container-contato img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+  }
+
+  footer {
+    font-size: 12px;
+    padding: 10px;
+    background-color: #212121;
+    color: white;
+    text-align: center;
+    width: 100%;
+  }
+
+  .btn {
+    display: none;
+  }
+}
